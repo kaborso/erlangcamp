@@ -1,1 +1,9 @@
-= ...  bound once, matched next
+=     ...  bound once, matched next
+''    ... can be used for atoms
+""    ... for strings
+BIFs  ... Built-In Functions (not actually written in erlang)
+          Used in guard scope (they're so close to the VM)
+          Cannot call just any function in a guard clause (well, NIFs...)
+
+clever usage of periods can keep some functions "private"
+a good practice is not going beyond two levels of indentation (cases, etc.)

@@ -7,3 +7,10 @@ BIFs  ... Built-In Functions (not actually written in erlang)
 
 clever usage of periods can keep some functions "private"
 a good practice is not going beyond two levels of indentation (cases, etc.)
+
+pman:start(). ... for processes
+appmon:start(). ... for applications
+
+erlang/otp handles releases and management of distributed systems right out of the box (but you knew that already)
+
+"building large systems with erlang" ... the book that has yet to be written

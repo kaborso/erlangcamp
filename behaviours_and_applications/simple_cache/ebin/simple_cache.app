@@ -3,6 +3,7 @@
               {vsn,"1"},
               {registered,[]},
               {applications,[kernel,stdlib]},
-              {mod,{simple_cache_app,[]}},
+              {mod,{sc_app,[]}},
               {env,[]},
-              {modules,[sc_server,simple_cache_app,simple_cache_sup]}]}.
+              {modules,[sc_app,sc_server,sc_sup,simple_cache_app,
+                        simple_cache_sup]}]}.

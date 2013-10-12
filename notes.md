@@ -103,3 +103,77 @@ ok
 <0.76.0>
 ```
 * The cascading bang messaging syntax works bc of return values.
+
+
+erl -name (domain name)
+    -sname (shortn ame)
+    -setcookie (for setting up network topology; not for security)
+
+net_adm:ping(shortname)
+auth:get_cookie()
+
+epmd (erlang port mapper daemon; port 4369)
+
+Location transparency
+ping adds node to list of known nodes (to self and recipient)
+node().
+nodes().
+register() ... give a pid a name.
+
+Pid::pid()
+Name::atom()
+NamedNode::{Name, node()}
+
+(aleph@vagabond)3> register(shell, self()).
+
+local registration
+(aleph@vagabond)1> register(shell, self()).
+(aleph@vagabond)2> shell ! hello.
+(aleph@vagabond)3> hello
+
+global registration
+
+(karsh@vagabond)1> register(shell, self()).
+(aleph@vagabond)4> {shell, 'karsh@vagabond'} ! {from, node()}.
+(karsh@vagabond)2> receive Msg2 -> Msg2 after 0 -> error end.
+{from,aleph@vagabond}
+
+
+other nodes
+Pid = spawn(fun() ->
+  register(blah, self()),
+  receive
+    From -> From ! {from, node()}
+    after 0 -> nope
+  end
+end).
+
+main node
+[{blah, Node} ! self() || Node <- nodes()].  % broadcast via a list comprehension against nodes().
+
+remote shell via crtl-g --> r (list jobs with j, connect with c -job_number-)
+
+remember
+processes are cheap
+architect truly concurrent systems
+erlang saves you from having to implement so much
+
+fallacies of distributed computing (lol)
+* network is reliable
+* latency is zero
+* bandwidth is infinite
+* topology does not change
+* there is one admin
+* transport cost is zero
+* network is homogeneous
+
+healthy properties of a distributed system
+* peer based: no leaders, masters, special nodes or central services (otp supervisor bridge)
+* asynchronous: resilient, expect failure, simple, loosely coupled
+* easy to debug: easy to interrogate, easy to determine state
+
+sick systems
+* not peer based
+*
+*
+*

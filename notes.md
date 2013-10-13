@@ -175,7 +175,7 @@ remember
 * architect truly concurrent systems
 * erlang saves you from having to implement so much
 
-fallacies of distributed computing (lol)
+fallacies of distributed computing (lol so true)
 * network is reliable
 * latency is zero
 * bandwidth is infinite
@@ -191,6 +191,6 @@ healthy properties of a distributed system
 
 sick systems
 * not peer based
-*
-*
-*
+* 
+* 
+* 

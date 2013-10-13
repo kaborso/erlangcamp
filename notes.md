@@ -1,24 +1,33 @@
 DAY ONE
 -------
-=     ...  bound once, matched next
-''    ... can be used for atoms
-""    ... for strings
-BIFs  ... Built-In Functions (not actually written in erlang)
-          Used in guard scope (they're so close to the VM)
-          Cannot call just any function in a guard clause (well, NIFs...)
+
+    =     ...  bound once, matched next
+    ''    ...  can be used for atoms
+    ""    ...  for strings
+    BIFs  ...  Built-In Functions (not actually written in erlang)
+               Used in guard scope (they're so close to the VM)
+               Cannot call just any function in a guard clause (well, NIFs...)
+
 
 clever usage of periods can keep some functions "private"
+
 a good practice is not going beyond two levels of indentation (cases, etc.)
 
-pman:start(). ... for processes
-appmon:start(). ... for applications
+monitoring proccess and applications
+
+    pman:start(). ... for processes
+    appmon:start(). ... for applications
 
 erlang/otp handles releases and management of distributed systems right out of the box (but you knew that already)
+
 otp gives you so much good stuff for free
+
 "building large systems with erlang" ... the book that has yet to be written
+
 sasl, lager
 
-erl -pa ebin --env ERL_LIBs deps
+run otp app
+`erl -pa ebin --env ERL_LIBs deps`
 
 
 DAY TWO
@@ -104,17 +113,17 @@ ok
 ```
 * The cascading bang messaging syntax works bc of return values.
 
-
+```
 erl -name (domain name)
     -sname (shortn ame)
     -setcookie (for setting up network topology; not for security)
 
 net_adm:ping(shortname)
 auth:get_cookie()
-
+```
 epmd (erlang port mapper daemon; port 4369)
 
-Location transparency
+### Location transparency
 ping adds node to list of known nodes (to self and recipient)
 node().
 nodes().
@@ -124,22 +133,27 @@ Pid::pid()
 Name::atom()
 NamedNode::{Name, node()}
 
+```
 (aleph@vagabond)3> register(shell, self()).
+```
 
 local registration
+```
 (aleph@vagabond)1> register(shell, self()).
 (aleph@vagabond)2> shell ! hello.
 (aleph@vagabond)3> hello
+```
 
 global registration
-
+```
 (karsh@vagabond)1> register(shell, self()).
 (aleph@vagabond)4> {shell, 'karsh@vagabond'} ! {from, node()}.
 (karsh@vagabond)2> receive Msg2 -> Msg2 after 0 -> error end.
 {from,aleph@vagabond}
-
+```
 
 other nodes
+```
 Pid = spawn(fun() ->
   register(blah, self()),
   receive
@@ -147,16 +161,19 @@ Pid = spawn(fun() ->
     after 0 -> nope
   end
 end).
+```
 
 main node
+```
 [{blah, Node} ! self() || Node <- nodes()].  % broadcast via a list comprehension against nodes().
+```
 
 remote shell via crtl-g --> r (list jobs with j, connect with c -job_number-)
 
 remember
-processes are cheap
-architect truly concurrent systems
-erlang saves you from having to implement so much
+* processes are cheap
+* architect truly concurrent systems
+* erlang saves you from having to implement so much
 
 fallacies of distributed computing (lol)
 * network is reliable

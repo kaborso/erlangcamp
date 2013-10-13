@@ -125,13 +125,15 @@ epmd (erlang port mapper daemon; port 4369)
 
 ### Location transparency
 ping adds node to list of known nodes (to self and recipient)
-node().
-nodes().
-register() ... give a pid a name.
 
-Pid::pid()
-Name::atom()
-NamedNode::{Name, node()}
+    node().     ... get name of this node (in form of `shortname@network`).
+    nodes().    ... return list of known nodes.
+    register(). ... give a pid a name.
+
+
+    Pid::pid()
+    Name::atom()
+    NamedNode::{Name, node()}
 
 ```
 (aleph@vagabond)3> register(shell, self()).
@@ -168,7 +170,7 @@ main node
 [{blah, Node} ! self() || Node <- nodes()].  % broadcast via a list comprehension against nodes().
 ```
 
-remote shell via crtl-g --> r (list jobs with j, connect with c -job_number-)
+remote shell via `crtl-g` --> `r` (list jobs with `j`, connect with `c [job_number]`)
 
 remember
 * processes are cheap
